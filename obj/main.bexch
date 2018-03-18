@@ -1,0 +1,19 @@
+[GENERATED OBJECT FILE]
+b__main.o
+[PROJECT FILES]
+E:\learning resources\uni\High Integrity\FINAL-assignment-1\asg1.gpr
+20180308005004
+[BOUND OBJECT FILES]
+E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\main.o
+[GENERATED SOURCE FILES]
+b__main.ads
+b__main.adb
+b__main.ali
+[RESULTING OPTIONS]
+-LE:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\
+-LE:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\
+-LC:/gnat/2017/lib/gcc/i686-pc-mingw32/6.3.1/adalib/
+-static
+-static-libgcc
+C:/gnat/2017/lib/gcc/i686-pc-mingw32/6.3.1/adalib/libgnat.a
+-Wl,--stack=0x2000000

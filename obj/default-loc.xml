@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<Locations >
+  <Project>
+    <vfs_file />
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\heart.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\heart.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\measures.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\heart.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\hrm.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\hrm.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\ICD.ads</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\hrm.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\network.adb</vfs_file>
+    </file_marker>
+    <file_marker column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\network.ads</vfs_file>
+    </file_marker>
+    <file_marker current="true" column=" 1" line=" 1" >
+      <vfs_project />
+      <vfs_file>E:\learning resources\uni\High Integrity\FINAL-assignment-1\src\closedloop.ads</vfs_file>
+    </file_marker>
+  </Project>
+</Locations>

@@ -1,0 +1,17 @@
+V "GNAT Lib v2017"
+M P W=b
+A -gnatA
+A -mtune=generic
+A -march=pentium4
+P ZX
+
+RN
+RV NO_IMPLEMENTATION_PRAGMAS
+
+U main%b		main.adb		c8bac64d NE OO SU
+
+D main.adb		20180312014224 c8bac64d main%b
+D system.ads		20170516105954 32a08138 system%s
+X 1 main.adb
+1U11*Main 1b11 6l5 6t9
+
