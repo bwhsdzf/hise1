@@ -17,6 +17,8 @@ package ICD is
          -- judge whether there are 5 tick before now
          IsFirstTick: Boolean;
 
+         totalTick : Natural;
+
          HeartbeatMax: Measures.BPM;
 
          HeartbeatAvg: Measures.BPM;
@@ -26,7 +28,10 @@ package ICD is
          Rate3 : Network.RateRecord;
          Rate4 : Network.RateRecord;
          Rate5 : Network.RateRecord;
-         Rate6 : Network.RateRecord;
+         rateCurrent : Network.RateRecord;
+         ResponseAvailable : Boolean;
+
+         ResponseMessage : Network.NetworkMessage;
 
          Prins : access Network.PrincipalArray;
 
@@ -49,7 +54,8 @@ package ICD is
    function ProcessMessage(Msg: in out Network.NetworkMessage; Icd: in out ICDType)
                            return Network.NetworkMessage;
 
-   procedure Tick(Icd: ICDType; Hrm: HRMType; Gen: GeneratorType);
+   procedure Tick(Icd1 : in out ICD.ICDType; Network1 : in out Network.Network;
+                 Hrm1 : in HRM.HRMType; Gen1 : in ImpulseGenerator.GeneratorType);
 
    procedure CheckMax(Gen: out ImpulseGenerator.GeneratorType);
 

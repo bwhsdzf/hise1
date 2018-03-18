@@ -1,7 +1,8 @@
 V "GNAT Lib v2017"
 A -gnatA
-A -mtune=generic
-A -march=pentium4
+A -mmacosx-version-min=10.13.2
+A -mtune=core2
+A -fPIC
 P ZX
 
 RN
@@ -9,6 +10,7 @@ RV NO_ALLOCATORS
 RV NO_ANONYMOUS_ALLOCATORS
 RV NO_EXCEPTIONS
 RV NO_IO
+RV NO_IMPLICIT_CONDITIONALS
 RV NO_LOCAL_ALLOCATORS
 RV NO_STANDARD_STORAGE_POOLS
 RV NO_DEFAULT_INITIALIZATION
@@ -16,7 +18,7 @@ RV NO_DYNAMIC_SIZED_OBJECTS
 RV NO_IMPLEMENTATION_PRAGMAS
 RV SPARK_05
 
-U icd%b			icd.adb			e5f2ac4f NE OO PK IU
+U icd%b			icd.adb			7f023775 NE OO PK IU
 W ada%s			ada.ads			ada.ali
 W ada.assertions%s	a-assert.adb		a-assert.ali
 W ada.exceptions%s	a-except.adb		a-except.ali
@@ -29,166 +31,183 @@ W measures%s		measures.adb		measures.ali
 W network%s		network.adb		network.ali
 W principal%s		principal.adb		principal.ali
 
-U icd%s			icd.ads			78d6fd9d EE NE OO PK IU
+U icd%s			icd.ads			ef62d17f EE NE OO PK IU
+W ada.tags%s		a-tags.adb		a-tags.ali
 W hrm%s			hrm.adb			hrm.ali
 W impulsegenerator%s	impulsegenerator.adb	impulsegenerator.ali
 W measures%s		measures.adb		measures.ali
 W network%s		network.adb		network.ali
 
-D ada.ads		20170516105950 76789da1 ada%s
-D a-assert.ads		20170516105948 a1febc19 ada.assertions%s
+D ada.ads		20170516105951 76789da1 ada%s
+D a-assert.ads		20170516105949 a1febc19 ada.assertions%s
 D a-contai.ads		20170516105950 61e5e089 ada.containers%s
-D a-cdlili.ads		20170516105948 8e06b4f2 ada.containers.doubly_linked_lists%s
-D a-conhel.ads		20170516105950 20298884 ada.containers.helpers%s
-D a-except.ads		20170516105952 291912d5 ada.exceptions%s
+D a-cdlili.ads		20170516105949 8e06b4f2 ada.containers.doubly_linked_lists%s
+D a-conhel.ads		20170516105951 20298884 ada.containers.helpers%s
+D a-except.ads		20170516105953 291912d5 ada.exceptions%s
 D a-finali.ads		20170516105954 bf4f806b ada.finalization%s
-D a-ioexce.ads		20170516105948 e4a01f64 ada.io_exceptions%s
+D a-ioexce.ads		20170516105949 e4a01f64 ada.io_exceptions%s
 D a-iteint.ads		20170516105952 7c7305e9 ada.iterator_interfaces%s
 D a-stream.ads		20170516105952 119b8fb3 ada.streams%s
-D a-tags.ads		20170516105954 d3a89129 ada.tags%s
-D a-textio.ads		20170516105954 386df5d4 ada.text_io%s
+D a-tags.ads		20170516105955 d3a89129 ada.tags%s
+D a-textio.ads		20170516105955 386df5d4 ada.text_io%s
 D a-unccon.ads		20170516105954 31484697 ada.unchecked_conversion%s
-D heart.ads		20180306232354 9fbc8907 heart%s
-D hrm.ads		20180306232354 070f95d8 hrm%s
-D icd.ads		20180318024614 971f4493 icd%s
-D icd.adb		20180318024800 be2ff6db icd%b
-D impulsegenerator.ads	20180306232354 31c22809 impulsegenerator%s
+D heart.ads		20180318030935 9fbc8907 heart%s
+D hrm.ads		20180318030935 070f95d8 hrm%s
+D icd.ads		20180318035650 00ab6871 icd%s
+D icd.adb		20180318041335 b36b4103 icd%b
+D impulsegenerator.ads	20180318030935 31c22809 impulsegenerator%s
 D interfac.ads		20170516105950 5ab55268 interfaces%s
 D i-cstrea.ads		20170516105950 e53d8b8e interfaces.c_streams%s
-D measures.ads		20180307101800 ab0ff7ab measures%s
-D network.ads		20180317011922 720bf374 network%s
-D principal.ads		20180307133304 ba98eec4 principal%s
-D system.ads		20170516105954 32a08138 system%s
+D measures.ads		20180318030935 ab0ff7ab measures%s
+D network.ads		20180318030935 720bf374 network%s
+D principal.ads		20180318030935 ba98eec4 principal%s
+D system.ads		20170516105953 085b6ffb system%s
 D s-assert.ads		20170516105954 cd8d2c94 system.assertions%s
 D s-atocou.ads		20170516105956 b45c2d8d system.atomic_counters%s
 D s-crtl.ads		20170516105948 0ebbdb71 system.crtl%s
 D s-exctab.ads		20170516105954 54135002 system.exception_table%s
 D s-ficobl.ads		20170516105956 078245e4 system.file_control_block%s
 D s-finroo.ads		20170516105954 4ff27390 system.finalization_root%s
-D s-parame.ads		20170516105954 7e2a0d7f system.parameters%s
-D s-soflin.ads		20170516105950 14e1eb6c system.soft_links%s
-D s-stache.ads		20170516105954 a37c21ec system.stack_checking%s
-D s-stalib.ads		20170516105954 09bd3940 system.standard_library%s
+D s-parame.ads		20170516105955 7e2a0d7f system.parameters%s
+D s-soflin.ads		20170516105951 14e1eb6c system.soft_links%s
+D s-stache.ads		20170516105955 a37c21ec system.stack_checking%s
+D s-stalib.ads		20170516105955 09bd3940 system.standard_library%s
 D s-stoele.ads		20170516105956 2dc34a04 system.storage_elements%s
 D s-traent.ads		20170516105950 005bf670 system.traceback_entries%s
-D s-unstyp.ads		20170516105952 34867c83 system.unsigned_types%s
+D s-unstyp.ads		20170516105953 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20170516105954 1b7d22d2 system.wch_con%s
 X 1 ada.ads
-16K9*Ada 20e8 17|5r6 5r23 6r6 99r19 151r19
+16K9*Ada 20e8 17|5r6 5r23 6r6 99r19 229r19
 X 2 a-assert.ads
-50K13*Assertions 66e19 17|6w10 99r23 151r23
-55X4*Assertion_Error 17|99r34 151r34
+50K13*Assertions 66e19 17|6w10 99r23 229r23
+55X4*Assertion_Error 17|99r34 229r34
 X 9 a-iteint.ads
 24h9 Forward_Iterator
 32h9 Reversible_Iterator<24R9[4|69]>
 X 12 a-textio.ads
 49K13*Text_IO 471e16 17|5w10 5r27
-242U14*Put 17|107s7 113s7
+242U14*Put 17|148s16 150s16 153s18 155s16 157s16 162s16 191s7
 X 15 hrm.ads
-7K9*HRM 38e8 16|1w6 1r15 17|1w6
-10R9*HRMType 16e17 16|52r38 17|104r38
+7K9*HRM 38e8 16|1w6 1r15 58r28 17|1w6 1r15
+10R9*HRMType 16e17 16|58r32 17|104r85
+32U14*GetRate 17|120s10 135s10
 X 16 icd.ads
-6K9*ICD 61l5 61e8 17|9b14 163l5 163t8
-8R9*ICDType 33e17 35r29 37r30 39r31 41r27 43r36 45r36 47r32 49r76 52r24 56r28
-. 58r34 17|11r29 25r30 30r31 35r27 40r36 47r36 55r32 67r76 104r24 117r28
-. 131r34
-11b10*IsOn{boolean} 17|13m11 27m11 32m11 37r18
+6K9*ICD 57r33 67l5 67e8 17|9b14 241l5 241t8
+8R9*ICDType 38e17 40r29 42r30 44r31 46r27 48r36 50r36 52r32 54r76 57r37 62r28
+. 64r34 17|11r29 25r30 30r31 35r27 40r36 47r36 55r32 67r76 104r33 195r28
+. 209r34
+11b10*IsOn{boolean} 17|13m11 27m11 32m11 37r18 160r24 167r24 175r24
 13i10*Tachy{21|15I12} 17|14m11 44m11 89r40
 15i10*Joules{21|9I12} 17|15m11 51m11 90r45
-18b10*IsFirstTick{boolean}
-20i10*HeartbeatMax{21|15I12}
-22i10*HeartbeatAvg{21|15I12}
-24r10*Rate1{22|35R9} 17|58r20 120r46
-25r10*Rate2{22|35R9} 17|59r20 120r29 121r33
-26r10*Rate3{22|35R9} 17|60r20 121r16 122r33
-27r10*Rate4{22|35R9} 17|61r20 122r16 123r33
-28r10*Rate5{22|35R9} 17|62r20 123r16
-29r10*Rate6{22|35R9}
-31p10*Prins(22|81A9) 17|17m11 19r14 154r20 155r26
-35U14*Init 35<19 35^38 17|11b14 23l8 23t12
-35r19 Icd{8R9} 17|11b19 13m7 14m7 15m7 17m7 19r10
-35p38 KnownPrins(22|81A9) 17|11b38 17r39 17r57 18r16 19r26
-37U14*On 37=17 17|25b14 28l8 28t10 72s13
-37r17 Icd{8R9} 17|25b17 27m7
-39U14*Off 39=18 17|30b14 33l8 33t11 77s13
-39r18 Icd{8R9} 17|30b18 32m7
-41V13*IsOn{boolean} 41>18 17|35b13 38l8 38t12
-41r18 Icd{8R9} 17|35b18 37r14
-43U14*SetBound 43=23 43>45 17|40b14 45l8 45t16 93s13
-43r23 Icd{8R9} 17|40b23 44m7
-43i45 Bound{integer} 17|40b45 43r37
-45U14*SetJoules 45=24 45>45 17|47b14 52l8 52t17 94s13
-45r24 Icd{8R9} 17|47b24 51m7
-45i45 J{integer} 17|47b45 50r36
-47V13*GetHistory{22|42A9} 47>24 17|55b13 64l8 64t18 84s32
-47r24 Icd{8R9} 17|55b24 58r16 59r16 60r16 61r16 62r16
-49V13*ProcessMessage{22|51R9} 49=28 49=64 17|67b13 102l8 102t22
-49r28 Msg{22|51R9} 17|67b28 70r12 74r34 79r35 83r37 88r37 93r27 94r27 96r37
-49r64 Icd{8R9} 17|67b64 72m16 77m17 84r43 89r36 90r41 93m22 94m23
-52U14*Tick 52>19 52>33 52>47 17|104b14 108l8 108t12
-52r19 Icd{8R9} 17|104b19
-52r33 Hrm{15|10R9} 17|104b33
-52r47 Gen{18|10R9} 17|104b47
-54U14*CheckMax 54<23 17|111b14 114l8 114t16
-54r23 Gen{18|10R9} 17|111b23
-56U14*CheckAvg 56>23 56=37 17|117b14 128l8 128t16
-56r23 Icd{8R9} 17|117b23 120r25 120r42 121r12 121r29 122r12 122r29 123r12
-. 123r29
-56r37 Gen{18|10R9} 17|117b37 126m38
-58V13*CheckAuthority{boolean} 58>28 58>43 17|131b13 160l8 160t22
-58r28 Icd{8R9} 17|131b28 154r16 155r22
-58r43 Msg{22|51R9} 17|131b43 134r12 136r23 139r23 142r23 145r23 148r23
+18b10*IsFirstTick{boolean} 17|119r15 127m15
+20i10*totalTick{natural} 17|114m12 114r30
+22i10*HeartbeatMax{21|15I12}
+24i10*HeartbeatAvg{21|15I12}
+26r10*Rate1{22|35R9} 17|58r20 125m15 130m15 198r46
+27r10*Rate2{22|35R9} 17|59r20 124m15 130r29 131m15 198r29 199r33
+28r10*Rate3{22|35R9} 17|60r20 123m15 131r29 132m15 199r16 200r33
+29r10*Rate4{22|35R9} 17|61r20 122m15 132r29 133m15 200r16 201r33
+30r10*Rate5{22|35R9} 17|62r20 121m15 133r29 134m15 201r16
+31r10*rateCurrent{22|35R9} 17|120m28 121r29 122r29 123r29 124r29 125r29 134r29
+. 135m28
+32b10*ResponseAvailable{boolean} 17|117m12 168m24 176m24
+34r10*ResponseMessage{22|51R9} 17|169m24 177m24
+36p10*Prins(22|81A9) 17|17m11 19r14 232r20 233r26
+40U14*Init 40<19 40^38 17|11b14 23l8 23t12
+40r19 Icd{8R9} 17|11b19 13m7 14m7 15m7 17m7 19r10
+40p38 KnownPrins(22|81A9) 17|11b38 17r39 17r57 18r16 19r26
+42U14*On 42=17 17|25b14 28l8 28t10 72s13
+42r17 Icd{8R9} 17|25b17 27m7
+44U14*Off 44=18 17|30b14 33l8 33t11 77s13
+44r18 Icd{8R9} 17|30b18 32m7
+46V13*IsOn{boolean} 46>18 17|35b13 38l8 38t12
+46r18 Icd{8R9} 17|35b18 37r14
+48U14*SetBound 48=23 48>45 17|40b14 45l8 45t16 93s13
+48r23 Icd{8R9} 17|40b23 44m7
+48i45 Bound{integer} 17|40b45 43r37
+50U14*SetJoules 50=24 50>45 17|47b14 52l8 52t17 94s13
+50r24 Icd{8R9} 17|47b24 51m7
+50i45 J{integer} 17|47b45 50r36
+52V13*GetHistory{22|42A9} 52>24 17|55b13 64l8 64t18 84s32
+52r24 Icd{8R9} 17|55b24 58r16 59r16 60r16 61r16 62r16
+54V13*ProcessMessage{22|51R9} 54=28 54=64 17|67b13 102l8 102t22 169s43 177s43
+54r28 Msg{22|51R9} 17|67b28 70r12 74r34 79r35 83r37 88r37 93r27 94r27 96r37
+54r64 Icd{8R9} 17|67b64 72m16 77m17 84r43 89r36 90r41 93m22 94m23
+57U14*Tick 57=19 57=46 58>18 58>41 17|104b14 186l8 186t12
+57r19 Icd1{8R9} 17|104b20 114m7 114r25 117m7 119r10 120m23 120r23 121m10
+. 121r24 122m10 122r24 123m10 123r24 124m10 124r24 125m10 125r24 127m10 130m10
+. 130r24 131m10 131r24 132m10 132r24 133m10 133r24 134m10 134r24 135m23 135r23
+. 160r19 167r19 168m19 169m19 169m73 169r73 175r19 176m19 177m19 177m72 177r72
+57r46 Network1{22|9R9} 17|104b42 140m29
+58r18 Hrm1{15|10R9} 17|104b76 120r18 135r18
+58r41 Gen1{18|10R9} 17|104b94
+60U14*CheckMax 60<23 17|189b14 192l8 192t16
+60r23 Gen{18|10R9} 17|189b23
+62U14*CheckAvg 62>23 62=37 17|195b14 206l8 206t16
+62r23 Icd{8R9} 17|195b23 198r25 198r42 199r12 199r29 200r12 200r29 201r12
+. 201r29
+62r37 Gen{18|10R9} 17|195b37 204m38
+64V13*CheckAuthority{boolean} 64>28 64>43 17|209b13 238l8 238t22
+64r28 Icd{8R9} 17|209b28 232r16 233r22
+64r43 Msg{22|51R9} 17|209b43 212r12 214r23 217r23 220r23 223r23 226r23
 X 17 icd.adb
 18i11 i{integer} 19r20 19r37
 41i7 newBound{21|15I12} 43m7 44r20
 48i7 newJ{21|9I12} 50m7 51r21
 56a7 RH{22|42A9} 58m7 59m7 60m7 61m7 62m7 63r14
-118i7 AvgChange{integer} 120m7 124m7 124r20 125r10
-132p7 Source{23|7P9} 136m13 139m13 142m13 145m13 148m13 155r13
-154i11 i{integer} 155r32
+106r7 ComingMessage{22|51R9} 140m60 146r15 169m58 169r58 177m58 177r58
+108b7 NewMessageAvailable{boolean} 140m39 144r10
+196i7 AvgChange{integer} 198m7 202m7 202r20 203r10
+210p7 Source{23|7P9} 214m13 217m13 220m13 223m13 226m13 233r13
+232i11 i{integer} 233r32
 X 18 impulsegenerator.ads
-7K9*ImpulseGenerator 16|2w6 2r28 54r32 56r49 17|2w6 2r28 111r32 117r49 126r10
-. 18|38e21
-10R9*GeneratorType 16|52r52 54r49 56r66 17|104r52 111r49 117r66 18|18e17
-33U14*SetImpulse 17|126s27
+7K9*ImpulseGenerator 16|2w6 2r28 58r51 60r32 62r49 17|2w6 2r28 189r32 195r49
+. 204r10 18|38e21
+10R9*GeneratorType 16|58r68 60r49 62r66 17|104r103 189r49 195r66 18|18e17
+33U14*SetImpulse 17|204s27
 X 21 measures.ads
-3K9*Measures 16|4w6 13r18 15r19 20r24 22r24 17|3w6 41r18 43r19 48r14 50r15
+3K9*Measures 16|4w6 13r18 15r19 22r24 24r24 17|3w6 41r18 43r19 48r14 50r15
 . 21|34e13
 9I12*Joules{integer} 16|15r28 17|48r23
-15I12*BPM{integer} 16|13r27 20r33 22r33 17|41r27
+15I12*BPM{integer} 16|13r27 22r33 24r33 17|41r27
 27V13*LimitBPM{15I12} 17|43s28
 31V13*LimitJoules{9I12} 17|50s24
 X 22 network.ads
-6K9*Network 16|3w6 3r19 24r18 25r18 26r18 27r18 28r18 29r18 31r25 47r48 49r40
-. 50r35 58r48 17|4w6 4r19 55r48 56r12 67r40 68r35 131r48 22|118e12
-14n32*ModeOn{14E9} 17|71r15 73r36 135r15
-15n32*ModeOff{14E9} 17|76r15 78r36 138r15
-16n32*ReadRateHistoryRequest{14E9} 17|81r15 141r15
-17n32*ChangeSettingsRequest{14E9} 17|92r15 147r15
-18n32*ReadSettingsRequest{14E9} 17|86r15 144r15
-19n32*ChangeSettingsResponse{14E9} 17|95r36
-20n32*ReadSettingsResponse{14E9} 17|87r36
-21n32*ReadRateHistoryResponse{14E9} 17|82r36
-35R9*RateRecord 16|24r26 25r26 26r26 27r26 28r26 29r26 22|38e14
-36i7*Rate{21|15I12} 17|120r35 120r52 121r22 121r39 122r22 122r39 123r22 123r39
-42A9*RateHistory(35R9)<integer> 16|47r56 17|55r56 56r20
-51R9*NetworkMessage 16|49r48 50r43 58r56 17|67r48 68r43 131r56 22|78e14
-51e24*MessageType{14E9} 17|70r16 73m21 78m21 82m21 87m21 95m21 134r16
-55p13*RSource{23|7P9} 17|88r41 145r27
+6K9*Network 16|3w6 3r19 26r18 27r18 28r18 29r18 30r18 31r24 34r28 36r25 52r48
+. 54r40 55r35 57r64 64r48 17|4w6 4r19 55r48 56r12 67r40 68r35 104r59 106r23
+. 140r7 209r48 22|118e12
+9R9*Network 16|57r72 17|104r67 22|116e14
+14n32*ModeOn{14E9} 17|71r15 73r36 147r18 213r15
+15n32*ModeOff{14E9} 17|76r15 78r36 149r18 216r15
+16n32*ReadRateHistoryRequest{14E9} 17|81r15 159r18 219r15
+17n32*ChangeSettingsRequest{14E9} 17|92r15 174r18 225r15
+18n32*ReadSettingsRequest{14E9} 17|86r15 165r18 222r15
+19n32*ChangeSettingsResponse{14E9} 17|95r36 152r18
+20n32*ReadSettingsResponse{14E9} 17|87r36 156r18
+21n32*ReadRateHistoryResponse{14E9} 17|82r36 154r18
+35R9*RateRecord 16|26r26 27r26 28r26 29r26 30r26 31r32 22|38e14
+36i7*Rate{21|15I12} 17|120m40 135m40 198r35 198r52 199r22 199r39 200r22 200r39
+. 201r22 201r39
+42A9*RateHistory(35R9)<integer> 16|52r56 17|55r56 56r20
+51R9*NetworkMessage 16|34r36 54r48 55r43 64r56 17|67r48 68r43 106r31 209r56
+. 22|78e14
+51e24*MessageType{14E9} 17|70r16 73m21 78m21 82m21 87m21 95m21 146r29 212r16
+55p13*RSource{23|7P9} 17|88r41 223r27
 57p13*RDestination{23|7P9} 17|88m21
 58i13*RTachyBound{21|15I12} 17|89m21
 59i13*RJoulesToDeliver{21|9I12} 17|90m21
-61p13*CSource{23|7P9} 17|96r41 148r27
+61p13*CSource{23|7P9} 17|96r41 226r27
 62i13*CTachyBound{21|15I12} 17|93r31
 63i13*CJoulesToDeliver{21|9I12} 17|94r31
 65p13*CDestination{23|7P9} 17|96m21
-67p13*MOnSource{23|7P9} 17|74m21 74r38 136r27
-69p13*MOffSource{23|7P9} 17|79m21 79r39 139r27
-71p13*HSource{23|7P9} 17|83r41 142r27
+67p13*MOnSource{23|7P9} 17|74m21 74r38 214r27
+69p13*MOffSource{23|7P9} 17|79m21 79r39 217r27
+71p13*HSource{23|7P9} 17|83r41 220r27
 73p13*HDestination{23|7P9} 17|83m21
 74a13*History{42A9} 17|84m21
-81A9*PrincipalArray(23|7P9)<integer> 16|31r33 35r58 17|11r58 17r24
+81A9*PrincipalArray(23|7P9)<integer> 16|36r33 40r58 17|11r58 17r24
+94U14*GetNewMessage 17|140s15
 X 23 principal.ads
-1K9*Principal 17|7w6 7r26 132r16 23|32e14
-7P9*PrincipalPtr(6R9) 17|7r36 132r26
+1K9*Principal 17|7w6 7r26 210r16 23|32e14
+7P9*PrincipalPtr(6R9) 17|7r36 210r26
 

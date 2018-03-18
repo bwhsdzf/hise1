@@ -1,27 +1,25 @@
 [GENERATED OBJECT FILE]
 b__manualoperationexample.o
 [PROJECT FILES]
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\asg1.gpr
-20180312052056
+/Users/JunjieHuang/Downloads/hise1/asg1.gpr
+20180318030935
 [BOUND OBJECT FILES]
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\measures.o
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\principal.o
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\randomnumber.o
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\heart.o
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\hrm.o
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\impulsegenerator.o
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\network.o
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\ICD.o
-E:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\manualoperationexample.o
+/Users/JunjieHuang/Downloads/hise1/obj/measures.o
+/Users/JunjieHuang/Downloads/hise1/obj/principal.o
+/Users/JunjieHuang/Downloads/hise1/obj/randomnumber.o
+/Users/JunjieHuang/Downloads/hise1/obj/heart.o
+/Users/JunjieHuang/Downloads/hise1/obj/hrm.o
+/Users/JunjieHuang/Downloads/hise1/obj/impulsegenerator.o
+/Users/JunjieHuang/Downloads/hise1/obj/network.o
+/Users/JunjieHuang/Downloads/hise1/obj/ICD.o
+/Users/JunjieHuang/Downloads/hise1/obj/manualoperationexample.o
 [GENERATED SOURCE FILES]
 b__manualoperationexample.ads
 b__manualoperationexample.adb
 b__manualoperationexample.ali
 [RESULTING OPTIONS]
--LE:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\
--LE:\learning resources\uni\High Integrity\FINAL-assignment-1\obj\
--LC:/gnat/2017/lib/gcc/i686-pc-mingw32/6.3.1/adalib/
+-L/Users/JunjieHuang/Downloads/hise1/obj/
+-L/Users/JunjieHuang/Downloads/hise1/obj/
+-L/users/junjiehuang/ada/lib/gcc/x86_64-apple-darwin14.5.0/6.3.1/adalib/
 -static
--static-libgcc
-C:/gnat/2017/lib/gcc/i686-pc-mingw32/6.3.1/adalib/libgnat.a
--Wl,--stack=0x2000000
+/users/junjiehuang/ada/lib/gcc/x86_64-apple-darwin14.5.0/6.3.1/adalib/libgnat.a

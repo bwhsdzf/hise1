@@ -1,7 +1,8 @@
 V "GNAT Lib v2017"
 A -gnatA
-A -mtune=generic
-A -march=pentium4
+A -mmacosx-version-min=10.13.2
+A -mtune=core2
+A -fPIC
 P ZX
 
 RN
@@ -15,20 +16,20 @@ U impulsegenerator%s	impulsegenerator.ads	057156a5 EE NE OO PK
 W heart%s		heart.adb		heart.ali
 W measures%s		measures.adb		measures.ali
 
-D ada.ads		20170516105950 76789da1 ada%s
-D a-numeri.ads		20170516105950 bb51c45a ada.numerics%s
+D ada.ads		20170516105951 76789da1 ada%s
+D a-numeri.ads		20170516105951 bb51c45a ada.numerics%s
 D a-nuflra.ads		20170516105950 4056ab7a ada.numerics.float_random%s
 D a-unccon.ads		20170516105954 31484697 ada.unchecked_conversion%s
-D heart.ads		20180306232354 9fbc8907 heart%s
-D impulsegenerator.ads	20180306232354 31c22809 impulsegenerator%s
-D impulsegenerator.adb	20180306232358 ca1a6ce4 impulsegenerator%b
+D heart.ads		20180318030935 9fbc8907 heart%s
+D impulsegenerator.ads	20180318030935 31c22809 impulsegenerator%s
+D impulsegenerator.adb	20180318030935 ca1a6ce4 impulsegenerator%b
 D interfac.ads		20170516105950 5ab55268 interfaces%s
-D measures.ads		20180307101800 ab0ff7ab measures%s
-D randomnumber.ads	20180307023110 b89e058a randomnumber%s
-D system.ads		20170516105954 32a08138 system%s
+D measures.ads		20180318030935 ab0ff7ab measures%s
+D randomnumber.ads	20180318030935 b89e058a randomnumber%s
+D system.ads		20170516105953 085b6ffb system%s
 D s-exctab.ads		20170516105954 54135002 system.exception_table%s
 D s-rannum.ads		20170516105952 99ade2f2 system.random_numbers%s
-D s-stalib.ads		20170516105954 09bd3940 system.standard_library%s
+D s-stalib.ads		20170516105955 09bd3940 system.standard_library%s
 X 5 heart.ads
 7K9*Heart 39e11 6|2w6 36r56 7|2w6 35r56 36r21 44r10
 10R9*HeartType 18e17 6|36r62 7|35r62 36r27
