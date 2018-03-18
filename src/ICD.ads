@@ -55,7 +55,7 @@ package ICD is
                            return Network.NetworkMessage;
 
    procedure Tick(Icd1 : in out ICD.ICDType; Network1 : in out Network.Network;
-                 Hrm1 : in HRM.HRMType; Gen1 : in ImpulseGenerator.GeneratorType);
+                 Hrm1 : in HRM.HRMType; Gen1 : in out ImpulseGenerator.GeneratorType);
 
    procedure CheckMax(Gen: out ImpulseGenerator.GeneratorType);
 

@@ -101,7 +101,8 @@ package body ICD is
 
    end ProcessMessage;
 
-   procedure Tick (Icd1: in out ICDType; Network1: in out Network.Network; Hrm1: in HRMType; Gen1: in GeneratorType)
+   procedure Tick (Icd1: in out ICDType; Network1: in out Network.Network;
+                   Hrm1: in HRMType; Gen1: in out GeneratorType)
    is
       ComingMessage : Network.NetworkMessage;
 
@@ -115,7 +116,7 @@ package body ICD is
 
       -- at the beginning the response is unavailable
       Icd1.ResponseAvailable := False;
-
+      -- judge whether it is the first tick
       if Icd1.IsFirstTick then
          GetRate(Hrm1,Icd1.rateCurrent.Rate);
          Icd1.rate5 := Icd1.rateCurrent;
@@ -149,17 +150,14 @@ package body ICD is
             when ModeOff =>
                Put("d");
 
-            when ChangeSettingsResponse =>
-                 Put("d");
-            when ReadRateHistoryResponse =>
-               Put("d");
-            when ReadSettingsResponse =>
-               Put("d");
 
             when ReadRateHistoryRequest =>
                if Icd1.IsOn = true  then
 
-               Put("hi");
+                  Icd1.ResponseAvailable := True;
+                  Icd1.ResponseMessage := ProcessMessage(ComingMessage, Icd1);
+
+
                end if;
 
             when ReadSettingsRequest =>
@@ -178,9 +176,16 @@ package body ICD is
 
                end if;
 
+               when others =>
+            raise Ada.Assertions.Assertion_Error;
 
          end case;
       end if;
+
+      if Icd1.IsOn = True and Icd1.IsFirstTick = False then
+        CheckAvg(Icd1,Gen1);
+      end if;
+
 
 
    end Tick;
@@ -198,9 +203,10 @@ package body ICD is
       AvgChange := abs (Icd.Rate2.Rate - Icd.Rate1.Rate) +
       abs (Icd.Rate3.Rate - Icd.Rate2.Rate) +
       abs (Icd.Rate4.Rate - Icd.Rate3.Rate) +
-      abs (Icd.Rate5.Rate - Icd.Rate4.Rate);
-      AvgChange := AvgChange/5;
-      if AvgChange > 10 then
+      abs (Icd.Rate5.Rate - Icd.Rate4.Rate) +
+      abs (Icd.rateCurrent.Rate - Icd.Rate5.Rate);
+      AvgChange := AvgChange/6;
+      if AvgChange >= 10 then
          ImpulseGenerator.SetImpulse(Gen,2);
       end if;
    end CheckAvg;
