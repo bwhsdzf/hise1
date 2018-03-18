@@ -1,9 +1,8 @@
 V "GNAT Lib v2017"
 M P W=b
 A -gnatA
-A -mmacosx-version-min=10.13.2
-A -mtune=core2
-A -fPIC
+A -mtune=generic
+A -march=pentium4
 P ZX
 
 RN
@@ -21,7 +20,7 @@ RV NO_DEFAULT_INITIALIZATION
 RV NO_IMPLEMENTATION_PRAGMAS
 RV SPARK_05
 
-U manualoperationexample%b  manualoperationexample.adb  0fed26f2 NE OO SU
+U manualoperationexample%b  manualoperationexample.adb  a0746a10 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -35,45 +34,45 @@ W measures%s		measures.adb		measures.ali
 W network%s		network.adb		network.ali
 W principal%s		principal.adb		principal.ali
 
-D ada.ads		20170516105951 76789da1 ada%s
+D ada.ads		20170516105950 76789da1 ada%s
 D a-calend.ads		20170516105954 2d5f01d4 ada.calendar%s
-D a-caldel.ads		20170516105949 9f20b83d ada.calendar.delays%s
+D a-caldel.ads		20170516105948 9f20b83d ada.calendar.delays%s
 D a-contai.ads		20170516105950 61e5e089 ada.containers%s
-D a-cdlili.ads		20170516105949 8e06b4f2 ada.containers.doubly_linked_lists%s
-D a-conhel.ads		20170516105951 20298884 ada.containers.helpers%s
-D a-except.ads		20170516105953 291912d5 ada.exceptions%s
+D a-cdlili.ads		20170516105948 8e06b4f2 ada.containers.doubly_linked_lists%s
+D a-conhel.ads		20170516105950 20298884 ada.containers.helpers%s
+D a-except.ads		20170516105952 291912d5 ada.exceptions%s
 D a-finali.ads		20170516105954 bf4f806b ada.finalization%s
-D a-inteio.ads		20170516105955 f64b89a4 ada.integer_text_io%s
-D a-ioexce.ads		20170516105949 e4a01f64 ada.io_exceptions%s
+D a-inteio.ads		20170516105954 f64b89a4 ada.integer_text_io%s
+D a-ioexce.ads		20170516105948 e4a01f64 ada.io_exceptions%s
 D a-iteint.ads		20170516105952 7c7305e9 ada.iterator_interfaces%s
 D a-stream.ads		20170516105952 119b8fb3 ada.streams%s
-D a-tags.ads		20170516105955 d3a89129 ada.tags%s
-D a-textio.ads		20170516105955 386df5d4 ada.text_io%s
+D a-tags.ads		20170516105954 d3a89129 ada.tags%s
+D a-textio.ads		20170516105954 386df5d4 ada.text_io%s
 D a-tiinio.ads		20170516105950 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20170516105954 31484697 ada.unchecked_conversion%s
-D heart.ads		20180318030935 9fbc8907 heart%s
-D hrm.ads		20180318030935 070f95d8 hrm%s
-D icd.ads		20180318051100 b3855666 icd%s
-D impulsegenerator.ads	20180318030935 31c22809 impulsegenerator%s
+D heart.ads		20180306232354 9fbc8907 heart%s
+D hrm.ads		20180306232354 070f95d8 hrm%s
+D icd.ads		20180318054738 1c1c1a84 icd%s
+D impulsegenerator.ads	20180306232354 31c22809 impulsegenerator%s
 D interfac.ads		20170516105950 5ab55268 interfaces%s
 D i-cstrea.ads		20170516105950 e53d8b8e interfaces.c_streams%s
-D manualoperationexample.adb  20180318030935 b8a3d229 manualoperationexample%b
-D measures.ads		20180318030935 ab0ff7ab measures%s
-D network.ads		20180318030935 720bf374 network%s
-D principal.ads		20180318030935 ba98eec4 principal%s
-D system.ads		20170516105953 085b6ffb system%s
+D manualoperationexample.adb  20180318022034 b8a3d229 manualoperationexample%b
+D measures.ads		20180307101800 ab0ff7ab measures%s
+D network.ads		20180317011922 720bf374 network%s
+D principal.ads		20180307133304 ba98eec4 principal%s
+D system.ads		20170516105954 32a08138 system%s
 D s-atocou.ads		20170516105956 b45c2d8d system.atomic_counters%s
 D s-crtl.ads		20170516105948 0ebbdb71 system.crtl%s
 D s-exctab.ads		20170516105954 54135002 system.exception_table%s
 D s-ficobl.ads		20170516105956 078245e4 system.file_control_block%s
 D s-finroo.ads		20170516105954 4ff27390 system.finalization_root%s
-D s-parame.ads		20170516105955 7e2a0d7f system.parameters%s
-D s-soflin.ads		20170516105951 14e1eb6c system.soft_links%s
-D s-stache.ads		20170516105955 a37c21ec system.stack_checking%s
-D s-stalib.ads		20170516105955 09bd3940 system.standard_library%s
+D s-parame.ads		20170516105954 7e2a0d7f system.parameters%s
+D s-soflin.ads		20170516105950 14e1eb6c system.soft_links%s
+D s-stache.ads		20170516105954 a37c21ec system.stack_checking%s
+D s-stalib.ads		20170516105954 09bd3940 system.standard_library%s
 D s-stoele.ads		20170516105956 2dc34a04 system.storage_elements%s
 D s-traent.ads		20170516105950 005bf670 system.traceback_entries%s
-D s-unstyp.ads		20170516105953 34867c83 system.unsigned_types%s
+D s-unstyp.ads		20170516105952 34867c83 system.unsigned_types%s
 D s-wchcon.ads		20170516105954 1b7d22d2 system.wch_con%s
 X 1 ada.ads
 16K9*Ada 20e8 23|1r6 1r23 2r6 2r31

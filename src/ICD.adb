@@ -218,28 +218,62 @@ package body ICD is
       case Msg.MessageType is
          when ModeOn =>
             Source := Msg.MOnSource;
+            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            for i in Icd.Prins'Range loop
+               if Source = Icd.Prins(i) and
+                 (Principal.HasRole(Source.all,Principal.Cardiologist) or
+                  Principal.HasRole(Source.all,Principal.ClinicalAssistant))then
+                  return True;
+               end if;
+            end loop;
 
          when ModeOff =>
             Source := Msg.MOffSource;
+            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            for i in Icd.Prins'Range loop
+               if Source = Icd.Prins(i) and
+                 (Principal.HasRole(Source.all,Principal.Cardiologist) or
+                  Principal.HasRole(Source.all,Principal.ClinicalAssistant))then
+                  return True;
+               end if;
+            end loop;
 
          when ReadRateHistoryRequest =>
             Source := Msg.HSource;
+            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            for i in Icd.Prins'Range loop
+               if Source = Icd.Prins(i) and
+                 (Principal.HasRole(Source.all,Principal.Cardiologist) or
+                  Principal.HasRole(Source.all,Principal.ClinicalAssistant))then
+                  return True;
+               end if;
+            end loop;
 
          when ReadSettingsRequest =>
             Source := Msg.RSource;
+            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            for i in Icd.Prins'Range loop
+               if Source = Icd.Prins(i) and
+                 (Principal.HasRole(Source.all,Principal.Cardiologist) or
+                  Principal.HasRole(Source.all,Principal.ClinicalAssistant))then
+                  return True;
+               end if;
+            end loop;
 
          when ChangeSettingsRequest =>
             Source := Msg.CSource;
+            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            for i in Icd.Prins'Range loop
+               if Source = Icd.Prins(i) and
+                 Principal.HasRole(Source.all,Principal.Cardiologist)then
+                  return True;
+               end if;
+            end loop;
 
          when others =>
             raise Ada.Assertions.Assertion_Error;
       end case;
 
-      for i in Icd.Prins'Range loop
-         if Source = Icd.Prins(i) then
-            return True;
-         end if;
-      end loop;
       return False;
    end CheckAuthority;
 

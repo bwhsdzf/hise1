@@ -59,7 +59,7 @@ package ICD is
 
    procedure CheckMax(Gen: out ImpulseGenerator.GeneratorType);
 
-   procedure CheckAvg(Icd: ICDType; Gen: in out ImpulseGenerator.GeneratorType);
+   procedure CheckAvg(Icd: in ICDType; Gen: in out ImpulseGenerator.GeneratorType);
 
    function CheckAuthority(Icd : ICDType; Msg: Network.NetworkMessage) return Boolean;
 
