@@ -19,10 +19,6 @@ package ICD is
 
          totalTick : Natural;
 
-         HeartbeatMax: Measures.BPM;
-
-         HeartbeatAvg: Measures.BPM;
-
          Rate1 : Network.RateRecord;
          Rate2 : Network.RateRecord;
          Rate3 : Network.RateRecord;
@@ -34,6 +30,15 @@ package ICD is
          ResponseMessage : Network.NetworkMessage;
 
          Prins : access Network.PrincipalArray;
+
+         --These numbers are used to calculate when to send sig to Gen for
+         --tachy situation
+         --NImpulse indicates how many signals we have sent for one tachy
+         --AvgTick means how many ticks between every 2 signal
+         --NTick means how many ticks passed since last signal
+         NImpulse : Integer;
+         AvgTick : Integer;
+         NTick : Integer;
 
       end record;
 
@@ -57,7 +62,7 @@ package ICD is
    procedure Tick(Icd1 : in out ICD.ICDType; Network1 : in out Network.Network;
                  Hrm1 : in HRM.HRMType; Gen1 : in out ImpulseGenerator.GeneratorType);
 
-   procedure CheckMax(Gen: out ImpulseGenerator.GeneratorType);
+   procedure CheckMax(Icd: in out ICDType; Gen: out ImpulseGenerator.GeneratorType);
 
    procedure CheckAvg(Icd: in ICDType; Gen: in out ImpulseGenerator.GeneratorType);
 

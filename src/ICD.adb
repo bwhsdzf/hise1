@@ -19,6 +19,10 @@ package body ICD is
          Icd.Prins(i) := KnownPrins(i);
       end loop;
 
+      Icd.NImpulse := 0;
+      Icd.AvgTick := 0;
+      Icd.NTick := 0;
+
 
    end Init;
 
@@ -114,6 +118,8 @@ package body ICD is
 
       Icd1.totalTick := Icd1.totalTick+1;
 
+      ImpulseGenerator.SetImpulse(Gen1,0);
+
       -- at the beginning the response is unavailable
       Icd1.ResponseAvailable := False;
       -- judge whether it is the first tick
@@ -182,18 +188,45 @@ package body ICD is
          end case;
       end if;
 
-      if Icd1.IsOn = True and Icd1.IsFirstTick = False then
-        CheckAvg(Icd1,Gen1);
+      if Icd1.IsOn and Icd1.NImpulse /= 0 then
+
+         --If this is not the tick that we should send impluse signal, just pass
+         if Icd1.NTick /= Icd1.AvgTick then
+            Icd1.NTick := Icd1.NTick +1;
+
+         --Else send the signal and signal counter +1, reset tick counter
+         else
+            ImpulseGenerator.SetImpulse(Gen1,2);
+            Icd1.NImpulse := Icd1.NImpulse +1;
+            Icd1.NTick := 0;
+         end if;
+
+         --Was that the last signal I need to send?
+         if Icd1.NImpulse = 10 then
+            Icd1.NImpulse := 0;
+         end if;
+
+      else
+         if Icd1.IsFirstTick = False then
+            CheckAvg(Icd1,Gen1);
+            CheckMax(Icd1,Gen1);
+         end if;
       end if;
+
 
 
 
    end Tick;
 
 
-   procedure CheckMax(Gen: out ImpulseGenerator.GeneratorType) is
+   procedure CheckMax(Icd: in out ICDType; Gen: out ImpulseGenerator.GeneratorType) is
    begin
-      Put("hi");
+      if Icd.rateCurrent.Rate >= Icd.Tachy then
+         Icd.AvgTick := 600 / (Icd.rateCurrent.Rate + 15);
+         ImpulseGenerator.SetImpulse(Gen,2);
+         Icd.NImpulse := 1;
+      end if;
+
    end CheckMax;
 
 
@@ -207,7 +240,7 @@ package body ICD is
       abs (Icd.rateCurrent.Rate - Icd.Rate5.Rate);
       AvgChange := AvgChange/6;
       if AvgChange >= 10 then
-         ImpulseGenerator.SetImpulse(Gen,2);
+         ImpulseGenerator.SetImpulse(Gen,Icd.Joules);
       end if;
    end CheckAvg;
 

@@ -20,7 +20,7 @@ RV NO_DEFAULT_INITIALIZATION
 RV NO_IMPLEMENTATION_PRAGMAS
 RV SPARK_05
 
-U manualoperationexample%b  manualoperationexample.adb  a0746a10 NE OO SU
+U manualoperationexample%b  manualoperationexample.adb  644af211 NE OO SU
 W ada%s			ada.ads			ada.ali
 W ada.calendar.delays%s	a-caldel.adb		a-caldel.ali
 W ada.integer_text_io%s	a-inteio.ads		a-inteio.ali
@@ -52,7 +52,7 @@ D a-tiinio.ads		20170516105950 aa04e5d6 ada.text_io.integer_io%s
 D a-unccon.ads		20170516105954 31484697 ada.unchecked_conversion%s
 D heart.ads		20180306232354 9fbc8907 heart%s
 D hrm.ads		20180306232354 070f95d8 hrm%s
-D icd.ads		20180318054738 1c1c1a84 icd%s
+D icd.ads		20180318065940 d8228285 icd%s
 D impulsegenerator.ads	20180306232354 31c22809 impulsegenerator%s
 D interfac.ads		20170516105950 5ab55268 interfaces%s
 D i-cstrea.ads		20170516105950 e53d8b8e interfaces.c_streams%s
@@ -104,18 +104,18 @@ X 18 hrm.ads
 32U14*GetRate 23|95s11 121s8 139s11
 36U14*Tick 23|110s11 123s8 146s11
 X 19 icd.ads
-6K9*ICD 67e8 23|10w6 20r14 60r4 76r13 79r13 84r13
-8R9*ICDType 38e17 23|20r18
-40U14*Init 23|60s8
-48U14*SetBound 23|79s17
-48r23 Icd{8R9} 23|79r26
-48i45 Bound{integer} 23|80r26
-50U14*SetJoules 23|84s17
-50r24 Icd{8R9} 23|84r27
-50i45 J{integer} 23|85r27
-64V13*CheckAuthority{boolean} 23|76s17
-64r28 Icd{8R9} 23|76r32
-64r43 Msg{25|51R9} 23|77r32
+6K9*ICD 72e8 23|10w6 20r14 60r4 76r13 79r13 84r13
+8R9*ICDType 43e17 23|20r18
+45U14*Init 23|60s8
+53U14*SetBound 23|79s17
+53r23 Icd{8R9} 23|79r26
+53i45 Bound{integer} 23|80r26
+55U14*SetJoules 23|84s17
+55r24 Icd{8R9} 23|84r27
+55i45 J{integer} 23|85r27
+69V13*CheckAuthority{boolean} 23|76s17
+69r28 Icd{8R9} 23|76r32
+69r43 Msg{25|51R9} 23|77r32
 X 20 impulsegenerator.ads
 7K9*ImpulseGenerator 38e21 23|7w6 18r16 58r4 63r4 66r4 109r7 122r4 136r4
 . 145r7
