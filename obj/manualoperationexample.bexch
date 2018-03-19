@@ -2,7 +2,7 @@
 b__manualoperationexample.o
 [PROJECT FILES]
 E:\learning resources\uni\High Integrity\hise1\asg1.gpr
-20180312052056
+20180319063808
 [BOUND OBJECT FILES]
 E:\learning resources\uni\High Integrity\hise1\obj\measures.o
 E:\learning resources\uni\High Integrity\hise1\obj\principal.o
@@ -12,6 +12,7 @@ E:\learning resources\uni\High Integrity\hise1\obj\hrm.o
 E:\learning resources\uni\High Integrity\hise1\obj\impulsegenerator.o
 E:\learning resources\uni\High Integrity\hise1\obj\network.o
 E:\learning resources\uni\High Integrity\hise1\obj\ICD.o
+E:\learning resources\uni\High Integrity\hise1\obj\closedloop.o
 E:\learning resources\uni\High Integrity\hise1\obj\manualoperationexample.o
 [GENERATED SOURCE FILES]
 b__manualoperationexample.ads

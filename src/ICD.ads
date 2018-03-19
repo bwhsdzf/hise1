@@ -2,6 +2,7 @@ with HRM; use HRM;
 with ImpulseGenerator; use ImpulseGenerator;
 with Network; use Network;
 with Measures;
+with Heart; use Heart;
 
 package ICD is
 
@@ -17,13 +18,14 @@ package ICD is
          -- judge whether there are 5 tick before now
          IsFirstTick: Boolean;
 
-         totalTick : Natural;
+         totalTick : Integer;
 
          Rate1 : Network.RateRecord;
          Rate2 : Network.RateRecord;
          Rate3 : Network.RateRecord;
          Rate4 : Network.RateRecord;
          Rate5 : Network.RateRecord;
+         Rate6 : Network.RateRecord;
          rateCurrent : Network.RateRecord;
          ResponseAvailable : Boolean;
 
@@ -60,7 +62,8 @@ package ICD is
                            return Network.NetworkMessage;
 
    procedure Tick(Icd1 : in out ICD.ICDType; Network1 : in out Network.Network;
-                 Hrm1 : in HRM.HRMType; Gen1 : in out ImpulseGenerator.GeneratorType);
+                  Hrm1 : in out HRM.HRMType; Gen1 : in out ImpulseGenerator.GeneratorType;
+                 Hrt1 : in HeartType);
 
    procedure CheckMax(Icd: in out ICDType; Gen: out ImpulseGenerator.GeneratorType);
 

@@ -3,8 +3,6 @@ project Asg1 is
    for Source_Dirs use ("src");
    for Object_Dir use "obj";
    for Main use ("manualoperationexample.adb");
-   for Source_Files use ("closedloop.ads", "heart.adb", "heart.ads", "hrm.adb", "hrm.ads", "ICD.adb", "ICD.ads", "impulsegenerator.adb", "impulsegenerator.ads", "manualoperationexample.adb", "measures.adb", "measures.ads", "network.adb", 
-      "network.ads", "principal.adb", "principal.ads", "randomnumber.adb", "randomnumber.ads");
 
 end Asg1;
 
