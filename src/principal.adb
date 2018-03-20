@@ -26,6 +26,7 @@ Package body Principal is
       Ada.Text_IO.Put(PrincipalPtrToString(P));
       Ada.Text_IO.Put(" -> ");
       DebugPrintPrincipal(P.all);
+      Ada.Text_IO.New_Line;
    end DebugPrintPrincipalPtr;
    
    procedure DebugPrintPrincipal(P : in Principal) is

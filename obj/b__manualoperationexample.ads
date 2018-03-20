@@ -35,7 +35,7 @@ package ada_main is
    pragma Export (C, main, "main");
 
    type Version_32 is mod 2 ** 32;
-   u00001 : constant Version_32 := 16#2f1c4afe#;
+   u00001 : constant Version_32 := 16#794e348a#;
    pragma Export (C, u00001, "manualoperationexampleB");
    u00002 : constant Version_32 := 16#b6df930e#;
    pragma Export (C, u00002, "system__standard_libraryB");
@@ -297,7 +297,7 @@ package ada_main is
    pragma Export (C, u00130, "system__val_intB");
    u00131 : constant Version_32 := 16#7a05ab07#;
    pragma Export (C, u00131, "system__val_intS");
-   u00132 : constant Version_32 := 16#a661b6d7#;
+   u00132 : constant Version_32 := 16#2080dc06#;
    pragma Export (C, u00132, "closedloopB");
    u00133 : constant Version_32 := 16#c54badef#;
    pragma Export (C, u00133, "closedloopS");
@@ -363,9 +363,9 @@ package ada_main is
    pragma Export (C, u00163, "hrmB");
    u00164 : constant Version_32 := 16#33bceb74#;
    pragma Export (C, u00164, "hrmS");
-   u00165 : constant Version_32 := 16#3ce626cb#;
+   u00165 : constant Version_32 := 16#d9b684d5#;
    pragma Export (C, u00165, "icdB");
-   u00166 : constant Version_32 := 16#c3b7462f#;
+   u00166 : constant Version_32 := 16#95e5385b#;
    pragma Export (C, u00166, "icdS");
    u00167 : constant Version_32 := 16#9094876d#;
    pragma Export (C, u00167, "ada__assertionsB");
@@ -379,11 +379,11 @@ package ada_main is
    pragma Export (C, u00171, "impulsegeneratorB");
    u00172 : constant Version_32 := 16#057156a5#;
    pragma Export (C, u00172, "impulsegeneratorS");
-   u00173 : constant Version_32 := 16#8b74a921#;
+   u00173 : constant Version_32 := 16#63dc5ec2#;
    pragma Export (C, u00173, "networkB");
    u00174 : constant Version_32 := 16#ed9a5ee9#;
    pragma Export (C, u00174, "networkS");
-   u00175 : constant Version_32 := 16#2bf99b12#;
+   u00175 : constant Version_32 := 16#36e1c73f#;
    pragma Export (C, u00175, "principalB");
    u00176 : constant Version_32 := 16#ba98eec4#;
    pragma Export (C, u00176, "principalS");

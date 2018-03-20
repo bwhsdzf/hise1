@@ -1,6 +1,11 @@
+--Authors: Zhongfan Dou 691889 zdou; Junjie Huang 751401 junjieh3
+--Subject: SWEN90010
+--Assignment 1
+--This is the ClosedLoop package which initialise all component of the
+--system and tick them
+
 with Ada.Text_IO; use Ada.Text_IO;
 with Ada.Integer_Text_IO; use Ada.Integer_Text_IO;
-
 with Measures; use Measures;
 with Heart;
 with HRM;
@@ -15,8 +20,7 @@ package body ClosedLoop is
    Hrt : Heart.HeartType;                -- The simulated heart
    Monitor : HRM.HRMType;                -- The simulated heart rate monitor
    Generator : ImpulseGenerator.GeneratorType; -- The simulated generator
-   HeartRate : BPM;
-   ICDUnit : ICD.ICDType;
+   ICDUnit : ICD.ICDType;                -- The simulated ICD unit
    Net : Network.Network;                -- The simulated network
    Card : Principal.PrincipalPtr := new Principal.Principal;  -- A cardiologist
    Clin : Principal.PrincipalPtr := new Principal.Principal;  -- A clinical assistant
@@ -32,7 +36,8 @@ package body ClosedLoop is
       KnownPrincipals(0) := Card;
       KnownPrincipals(1) := Clin;
       KnownPrincipals(2) := Patient;
-      -- Initialise the components and turn the machines on
+
+      --Initialise all components
       Heart.Init(Hrt);
       HRM.Init(Monitor);
       ImpulseGenerator.Init(Generator);
@@ -42,16 +47,16 @@ package body ClosedLoop is
       HRM.On(Monitor, Hrt);
       ImpulseGenerator.On(Generator);
 
-      -- Set the new impulse to 0
+
       ImpulseGenerator.SetImpulse(Generator, 0);
    end Init;
 
    procedure Tick is
    begin
+      Network.Tick(Net);
+      ICD.Tick(ICDUnit,Net,Monitor,Generator,Hrt);
       ImpulseGenerator.Tick(Generator, Hrt);
       HRM.Tick(Monitor, Hrt);
       Heart.Tick(Hrt);
-      Network.Tick(Net);
-      ICD.Tick(ICDUnit,Net,Monitor,Generator,Hrt);
    end Tick;
 end ClosedLoop;

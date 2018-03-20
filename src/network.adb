@@ -114,7 +114,7 @@ package body Network is
                          Message : in NetworkMessage) is
    begin
       -- in this simulation, just print the message to mimic sending it
-      Ada.Text_IO.Put("Sending message on Network: "); New_Line;
+      --Ada.Text_IO.Put("Sending message on Network: "); New_Line;
       DebugPrintMessage(Message);
    end SendMessage;
    
@@ -135,7 +135,7 @@ package body Network is
             Principal.DebugPrintPrincipalPtr(Message.HSource);
             Put(")"); New_Line;
          when ReadRateHistoryResponse =>
-           Put("ReadRateHistoryRequest (HDestination: ");
+           Put("ReadRateHistoryReponse (HDestination: ");
            Principal.DebugPrintPrincipalPtr(Message.HDestination);
            Put("; History: "); 
            for Index in Message.History'Range loop
@@ -144,8 +144,24 @@ package body Network is
               Put(", ");
            end loop;
            Put(")"); New_Line;
+         when ReadSettingsResponse =>
+            Put("ReadSettingsReponse (RDestination: ");
+            Principal.DebugPrintPrincipalPtr(Message.RDestination);
+            Put("    ");
+            Ada.Integer_Text_IO.Put(Item => Message.RTachyBound);
+            Put("    ");
+            Ada.Integer_Text_IO.Put(Item => Message.RJoulesToDeliver);
+            New_Line;
+            
+         when ReadSettingsRequest =>
+            Put("ReadSettingsReponse (RSource: ");
+            Principal.DebugPrintPrincipalPtr(Message.RSource);
+            New_Line;
+         when ChangeSettingsResponse =>
+            Put("ChangeSettingsResponse (CDestination: ");
+            Principal.DebugPrintPrincipalPtr(Message.CDestination);
+            New_Line;
          when others =>
-            -- you should implement these for your own debugging if you wish
             null;
       end case;
    end DebugPrintMessage;
@@ -156,6 +172,8 @@ package body Network is
         RandomNumber.RandomBooleanWithBias(NewMessageProbabilityPerTick);
       if Net.CurrentMessageAvailable then
          Net.CurrentMessage := GenerateRandomMessage(Net.Principals.all);
+         --Put("Sending request ");
+         --DebugPrintMessage(Net.CurrentMessage);
       end if;
    end Tick;
    

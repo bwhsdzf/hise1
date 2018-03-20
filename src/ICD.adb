@@ -1,3 +1,10 @@
+--Authors: Zhongfan Dou 691889 zdou; Junjie Huang 751401 junjieh3
+--Subject: SWEN90010
+--Assignment 1
+--This is the package body of the ICD unit, which is responsible to handling
+--message from network, checking heart rate status, and changing setting of the
+--system, etc.
+
 with HRM; use HRM;
 with ImpulseGenerator; use ImpulseGenerator;
 with Measures;
@@ -10,14 +17,29 @@ with Principal; use type Principal.PrincipalPtr;
 
 package body ICD is
 
+   --The impulse for tachycardia
+   TachyImpulse : constant Measures.Joules := 2;
+
+   --Number of decisecond in one min
+   MinToDeci : constant Integer := 600;
+
+   --The BMP added to current heart rate for tachycardia
+   TachyBMP : constant Measures.BPM := 15;
+
+   --The average change of detecting ventricle fibrillation
+   VentriChange : constant Measures.BPM := 10;
+
+
    procedure Init(Icd : out ICDType; KnownPrins : access PrincipalArray) is
    begin
-            --initial mode is off
+      --initial mode is off
       Icd.IsOn := False;
       --initial upper bound is 100
       Icd.Tachy := 100;
       --initial Joules
       Icd.Joules := 30;
+
+      --Initialising for the first tick
       Icd.IsFirstTick :=True;
       Icd.rate1.Rate := Measures.BPM(0);
       Icd.rate2.Rate := Measures.BPM(0);
@@ -29,6 +51,7 @@ package body ICD is
 
       Icd.totalTick := 0;
 
+      --Recording the known principles
       Icd.Prins := new PrincipalArray(KnownPrins'First..KnownPrins'Last);
       for i in KnownPrins'Range loop
          Icd.Prins(i) := KnownPrins(i);
@@ -37,8 +60,6 @@ package body ICD is
       Icd.NImpulse := 0;
       Icd.AvgTick := 0;
       Icd.NTick := 0;
-
-
    end Init;
 
 
@@ -57,42 +78,45 @@ package body ICD is
       return Icd.IsOn;
    end IsOn;
 
+   --Change the upper bound of tachycardia, between range of -1 to 300
    procedure SetBound(Icd : in out ICDType; Bound:in Integer) is
       newBound : Measures.BPM;
    begin
       newBound := Measures.LimitBPM(Bound);
       Icd.Tachy := newBound;
-      Put("Setting bound to");
-      Put(Item => newBound);
-      New_Line;
+      --Put("Setting bound to");
+      --Put(Item => newBound);
+      --New_Line;
    end SetBound;
 
+   --Change the jules to deliver for ventricle fibrillation
    procedure SetJoules(Icd: in out ICDType; J:in Integer) is
       newJ : Measures.Joules;
    begin
       newJ := Measures.LimitJoules(J);
       Icd.Joules := newJ;
-      Put("Setting J to");Put(Item => newJ);
-      New_Line;
+      --Put("Setting J to");Put(Item => newJ);
+      --New_Line;
    end SetJoules;
 
-
+   --Return 5 most recent reading of heart rate
    function GetHistory(Icd: in ICDType) return Network.RateHistory is
       RH : Network.RateHistory;
    begin
-      RH(1) := Icd.Rate2;
-      RH(2) := Icd.Rate3;
-      RH(3) := Icd.Rate4;
-      RH(4) := Icd.Rate5;
-      RH(5) := Icd.Rate6;
+      RH(1) := Icd.Rate3;
+      RH(2) := Icd.Rate4;
+      RH(3) := Icd.Rate5;
+      RH(4) := Icd.Rate6;
+      RH(5) := Icd.rateCurrent;
       return RH;
    end GetHistory;
 
-
+   --Return the response message
    function ProcessMessage(Msg: in out Network.NetworkMessage; Icd: in out ICDType)
                            return Network.NetworkMessage is
    begin
       case Msg.MessageType is
+         --For on and off, just return the message itself
          when ModeOn =>
             return (MessageType => ModeOn,
                     MOnSource => Msg.MOnSource);
@@ -101,17 +125,20 @@ package body ICD is
             return (MessageType => ModeOff,
                     MOffSource => Msg.MOffSource);
 
+         --Return the history for reading request
          when ReadRateHistoryRequest =>
             return (MessageType => ReadRateHistoryResponse,
                     HDestination => Msg.HSource,
                     History => GetHistory(Icd));
 
+         --Return the settings
          when ReadSettingsRequest =>
             return (MessageType => ReadSettingsResponse,
                     RDestination => Msg.RSource,
                     RTachyBound => Icd.Tachy,
                     RJoulesToDeliver => Icd.Joules);
 
+         --Just reply to the setting changing request
          when ChangeSettingsRequest =>
             SetBound(Icd, Msg.CTachyBound);
             SetJoules(Icd,Msg.CJoulesToDeliver);
@@ -124,6 +151,7 @@ package body ICD is
 
    end ProcessMessage;
 
+   --Simulate the tick
    procedure Tick (Icd1: in out ICDType; Network1: in out Network.Network;
                    Hrm1: in out HRMType; Gen1: in out GeneratorType; Hrt1 :HeartType)
    is
@@ -134,11 +162,14 @@ package body ICD is
 
       Icd1.totalTick := Icd1.totalTick+1;
 
+      --Always set impluse generator to 0 to prevent it from sending impulse when
+      --no need
       ImpulseGenerator.SetImpulse(Gen1,0);
 
-      -- at the beginning the response is unavailable
+      --At the beginning the response is unavailable
       Icd1.ResponseAvailable := False;
-      -- judge whether it is the first tick
+      --Judge whether it is the first tick, do this to prevent ventricle fibrillation
+      --if first reading is too high.
       If Icd1.IsOn then
          if Icd1.IsFirstTick then
             Icd1.rateCurrent.Time := Measures.TickCount(Icd1.totalTick);
@@ -149,8 +180,9 @@ package body ICD is
             Icd1.Rate3 := Icd1.rateCurrent;
             Icd1.Rate2 := Icd1.rateCurrent;
             Icd1.Rate1 := Icd1.rateCurrent;
-
             Icd1.IsFirstTick := False;
+
+         --Not first reading, then simply update history
          else
             Icd1.Rate1 := Icd1.Rate2;
             Icd1.Rate2 := Icd1.Rate3;
@@ -164,13 +196,11 @@ package body ICD is
 
       end if;
 
+      --Handle the message
       Network.GetNewMessage(Network1, NewMessageAvailable, ComingMessage);
-
-      --handle the message
-
       if NewMessageAvailable then
-
-         case ComingMessage.MessageType is
+         if CheckAuthority(Icd1, ComingMessage) then
+            case ComingMessage.MessageType is
             when ModeOn =>
                On(Icd1);
                ImpulseGenerator.On(Gen1);
@@ -182,44 +212,41 @@ package body ICD is
                HRM.Off(Hrm1);
                Icd1.ResponseMessage := ProcessMessage(ComingMessage, Icd1);
 
+            --Only return reading when the system is on
             when ReadRateHistoryRequest =>
                if Icd1.IsOn = true  then
-
                   Icd1.ResponseAvailable := True;
                   Icd1.ResponseMessage := ProcessMessage(ComingMessage, Icd1);
-
-
                end if;
 
             when ReadSettingsRequest =>
-
                if Icd1.IsOn = False  then
                   Icd1.ResponseAvailable := True;
                   Icd1.ResponseMessage := ProcessMessage(ComingMessage, Icd1);
-
                end if;
 
-
+            --Only change setting when the system is off
             when ChangeSettingsRequest =>
                if Icd1.IsOn = False  then
                   Icd1.ResponseAvailable :=true;
                   Icd1.ResponseMessage := ProcessMessage(ComingMessage,Icd1);
-
                end if;
 
                when others =>
             raise Ada.Assertions.Assertion_Error;
-         end case;
+            end case;
+         end if;
+
+         --Send the message to network, if necessary
          if Icd1.ResponseAvailable then
             Network.SendMessage(Network1,Icd1.ResponseMessage);
          end if;
-
-
       end if;
 
+      --Now see if impulse generator need to deliver impulse
       if Icd1.IsOn then
          if Icd1.NImpulse /= 0 then
-            Put_Line("Need more impulse");
+            --Put_Line("Need more impulse");
 
             --If this is not the tick that we should send impluse signal, just pass
             if Icd1.NTick /= Icd1.AvgTick then
@@ -227,10 +254,7 @@ package body ICD is
 
                --Else send the signal and signal counter +1, reset tick counter
             else
-               Put("Sending impulse ");
-               Put(Item => Icd1.NImpulse);
-               New_Line;
-               ImpulseGenerator.SetImpulse(Gen1,2);
+               ImpulseGenerator.SetImpulse(Gen1,TachyImpulse);
                Icd1.NImpulse := Icd1.NImpulse +1;
                Icd1.NTick := 0;
             end if;
@@ -240,34 +264,28 @@ package body ICD is
                Icd1.NImpulse := 0;
             end if;
 
+         --Else othing special so just check the status
          else
-            Put("passing tick");New_Line;
-            if Icd1.IsFirstTick = False then
-               CheckAvg(Icd1,Gen1);
-               CheckMax(Icd1,Gen1);
-            end if;
+            --Put("passing tick");New_Line;
+            CheckAvg(Icd1,Gen1);
+            CheckMax(Icd1,Gen1);
          end if;
       end if;
-
-
-
-
-
    end Tick;
 
-
+   --Check if the most recent heart rate is higher than setting upper bound
    procedure CheckMax(Icd: in out ICDType; Gen: out ImpulseGenerator.GeneratorType) is
    begin
+      --If Higher, then send first impulse, and starting count impulse and ticks
       if Icd.rateCurrent.Rate >= Icd.Tachy then
-         Put("Max reached");New_Line;
-         Icd.AvgTick := 600 / (Icd.rateCurrent.Rate + 15);
-         ImpulseGenerator.SetImpulse(Gen,2);
+         Icd.AvgTick := MinToDeci / (Icd.rateCurrent.Rate + TachyBMP);
+         ImpulseGenerator.SetImpulse(Gen,TachyImpulse);
          Icd.NImpulse := 1;
       end if;
 
    end CheckMax;
 
-
+   --Check if ventricle fibrillation has happended
    procedure CheckAvg(Icd: ICDType; Gen: in out ImpulseGenerator.GeneratorType) is
       AvgChange : Integer;
    begin
@@ -278,73 +296,73 @@ package body ICD is
       abs (Icd.Rate6.Rate - Icd.Rate5.Rate) +
       abs (Icd.rateCurrent.Rate - Icd.Rate5.Rate);
       AvgChange := AvgChange/6;
-      if AvgChange >= 10 then
-         Put("avgchng reached");New_Line;
+      if AvgChange >= VentriChange then
+         --Put("avgchng reached");New_Line;
          ImpulseGenerator.SetImpulse(Gen,Icd.Joules);
       end if;
    end CheckAvg;
 
-
-   function CheckAuthority(Icd : ICDType; Msg: Network.NetworkMessage) return Boolean is
-      Source : Principal.PrincipalPtr;
+   --Check the authority of comming message
+   function CheckAuthority(Icd : in ICDType; Msg: in out Network.NetworkMessage) return Boolean is
    begin
       case Msg.MessageType is
+         --Only the doctor and assistant can switch on and off
          when ModeOn =>
-            Source := Msg.MOnSource;
-            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            --Principal.DebugPrintPrincipalPtr(Msg.MOnSource);
             for i in Icd.Prins'Range loop
-               if Source = Icd.Prins(i) and
-                 (Principal.HasRole(Source.all,Principal.Cardiologist) or
-                  Principal.HasRole(Source.all,Principal.ClinicalAssistant))then
+               if Msg.MOnSource = Icd.Prins(i) and
+                 (Principal.HasRole(Msg.MOnSource.all,Principal.Cardiologist) or
+                  Principal.HasRole(Msg.MOnSource.all,Principal.ClinicalAssistant))then
                   return True;
                end if;
             end loop;
 
          when ModeOff =>
-            Source := Msg.MOffSource;
-            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            --Principal.DebugPrintPrincipalPtr(Msg.MOffSource);
             for i in Icd.Prins'Range loop
-               if Source = Icd.Prins(i) and
-                 (Principal.HasRole(Source.all,Principal.Cardiologist) or
-                  Principal.HasRole(Source.all,Principal.ClinicalAssistant))then
+               if Msg.MOffSource = Icd.Prins(i) and
+                 (Principal.HasRole(Msg.MOffSource.all,Principal.Cardiologist) or
+                  Principal.HasRole(Msg.MOffSource.all,Principal.ClinicalAssistant))then
                   return True;
                end if;
             end loop;
 
+         --Cardiologist, assistant and patient can read the hsitory
          when ReadRateHistoryRequest =>
-            Source := Msg.HSource;
-            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            --Principal.DebugPrintPrincipalPtr(Msg.HSource);
             for i in Icd.Prins'Range loop
-               if Source = Icd.Prins(i) then
+               if Msg.HSource = Icd.Prins(i) then
                   return True;
                end if;
             end loop;
 
+         --Cardiologist and assistant can read the setting
          when ReadSettingsRequest =>
-            Source := Msg.RSource;
-            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            --Put(Principal.PrincipalPtrToString(Msg.RSource));
             for i in Icd.Prins'Range loop
-               if Source = Icd.Prins(i) and
-                 (Principal.HasRole(Source.all,Principal.Cardiologist) or
-                  Principal.HasRole(Source.all,Principal.ClinicalAssistant))then
+               if Msg.RSource = Icd.Prins(i)
+                 and (Principal.HasRole(Msg.RSource.all,Principal.Cardiologist) or
+                          Principal.HasRole(Msg.RSource.all,Principal.ClinicalAssistant))
+               then
                   return True;
                end if;
             end loop;
 
+
+         --Only the cardiologist can change the setting
          when ChangeSettingsRequest =>
-            Source := Msg.CSource;
-            --Put_Line(Item => Principal.PrincipalPtrToString(P => Source));
+            --Principal.DebugPrintPrincipalPtr(Msg.CSource);
             for i in Icd.Prins'Range loop
-               if Source = Icd.Prins(i) and
-                 Principal.HasRole(Source.all,Principal.Cardiologist)then
+               if Msg.CSource = Icd.Prins(i) and
+                 Principal.HasRole(Msg.CSource.all,Principal.Cardiologist)then
                   return True;
                end if;
             end loop;
-
          when others =>
-            raise Ada.Assertions.Assertion_Error;
+            null;
       end case;
 
+      --Otherwise not authorised
       return False;
    end CheckAuthority;
 
